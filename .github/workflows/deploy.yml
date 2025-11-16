@@ -12,3 +12,18 @@ jobs:
 
       - name: Imprimir variable de entorno
         run: echo "Valor de la variable es ${{ vars.NAME }}"
+
+  second_job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup
+        uses: actions/setup-node@v5
+        with:
+          node-version: "24"
+
+      - name: Instalar dependencias
+        run: npm install
