@@ -9,3 +9,6 @@ jobs:
     steps:
       - name: Imprimir secreto
         run: echo "Valor del secreto es ${{ secrets.TOKEN_SECRET }}"
+
+      - name: Imprimir variable de entorno
+        run: echo "Valor de la variable es ${{ vars.NAME }}"
