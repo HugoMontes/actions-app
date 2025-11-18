@@ -64,9 +64,8 @@ jobs:
     steps:
       - name: Notify to Slack
         uses: slackapi/slack-github-action@v2.1.1
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.TOKEN_SLACK }}
         with:
-          webhook: ${{ secrets.TOKEN_SLACK }}
-          webhook-type: webhook-trigger
-          payload: |
-            status: "${{ job.status }}"
-            option: "false"
+          channel-id: "C09TBH70L5R"
+          slack-message: "GitHub Action notificación - Estado: ${{ job.status }}"
