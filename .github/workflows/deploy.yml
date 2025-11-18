@@ -14,7 +14,12 @@ jobs:
         run: echo "Valor de la variable es ${{ vars.NAME }}"
 
   build_job:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [22, 24]
 
     steps:
       - name: Checkout
@@ -23,7 +28,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node@v5
         with:
-          node-version: "24"
+          node-version: ${{ matrix.node }}
 
       - name: Instalar dependencias
         run: npm install
@@ -35,6 +40,7 @@ jobs:
         run: npm run build
 
       - name: Upload artifact
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.node == 22 }}
         uses: actions/upload-pages-artifact@v4
         with:
           path: public/
