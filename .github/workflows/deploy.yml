@@ -64,8 +64,11 @@ jobs:
     steps:
       - name: Notify to Slack
         uses: slackapi/slack-github-action@v2.1.1
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.TOKEN_SLACK }}
         with:
-          channel-id: "C09TBH70L5R"
-          slack-message: "GitHub Action notificación - Estado: ${{ job.status }}"
+          token: ${{ secrets.TOKEN_SLACK }}
+          method: chat.postMessage
+          payload: |
+            {
+              "channel": "C1234567890",  # ⬅️ REEMPLAZA con tu Channel ID real
+              "text": "✅ Prueba exitosa - Workflow: ${{ job.status }}"
+            }
