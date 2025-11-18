@@ -69,6 +69,43 @@ jobs:
           method: chat.postMessage
           payload: |
             {
-              "channel": "C09TBH70L5R",  # ⬅️ REEMPLAZA con tu Channel ID real
-              "text": "✅ Prueba exitosa - Workflow: ${{ job.status }}"
+              "channel": ${{ secrets.SLACK_CHANNEL_ID }},
+              "text": "Workflow Notification - ${{ job.status }}",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "GitHub Actions Resultado"
+                  }
+                },
+                {
+                  "type": "section", 
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Estado:*\n${{ job.status }}"
+                    },
+                    {
+                      "type": "mrkdwn", 
+                      "text": "*Repositorio:*\n${{ github.repository }}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Rama:*\n${{ github.ref_name }}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Workflow:*\n${{ github.workflow }}"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Resultado Deploy:* ${{ needs.deploy_job.result }}"
+                  }
+                }
+              ]
             }
