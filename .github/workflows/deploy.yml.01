@@ -1,0 +1,20 @@
+name: Deploy
+
+on: push
+
+jobs:
+  first_job:
+    runs-on: ubuntu-latest
+
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+
+    steps:
+      - name: Install redis cli
+        run: sudo apt-get update -y && sudo apt-get install redis-tools -y
+
+      - name: Test redis
+        run: redis-cli -h localhost -p 6379 ping
