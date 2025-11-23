@@ -1,7 +1,8 @@
 name: Deploy
 
 #on: push
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
 
 jobs:
   build_job:
@@ -25,9 +26,9 @@ jobs:
       - name: Build page
         run: npm run build
 
-      # - name: Deploy to Azure
-      #   uses: Azure/static-web-apps-deploy@v1
-      #   with:
-      #     azure_static_web_apps_api_token: ${{ secrets.AZURE_TOKEN }}
-      #     app_location: "public" # Ubicacion de todos los recursos a subir en el servidor
-      #     deployment_action: "upload"
+      - name: Deploy to Azure
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_TOKEN }}
+          app_location: "public" # Ubicacion de todos los recursos a subir en el servidor
+          deployment_action: "upload"
