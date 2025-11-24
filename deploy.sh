@@ -1,12 +1,12 @@
 BRANCH=$1
 
-if [ "$BRANCH" == "main" ]; then
+if [ "$BRANCH" == "master" ]; then
     DEPLOY_PATH="/home/azureuser/practicas-ga"
 else
     DEPLOY_PATH="/home/azureuser/stage"
 
 
-ssh -o StrictHostKeyChecking=no azureuser@4.227.181.213 << 'EOF'
+ssh -o StrictHostKeyChecking=no azureuser@4.227.181.213 << EOF
 
     cd $DEPLOY_PATH
 
