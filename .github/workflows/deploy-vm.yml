@@ -2,8 +2,9 @@ name: Deploy
 
 on: 
   push:
-    - main
-    - stage
+    branches:
+      - main
+      - stage
 
 jobs:
   build_job:
