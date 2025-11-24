@@ -1,0 +1,33 @@
+name: Deploy
+
+on: push
+
+jobs:
+  build_job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup
+        uses: actions/setup-node@v5
+        with:
+          node-version: 18
+    
+      - name: Set cache
+        uses: actions/cache@v4
+        with:
+            path: node_modules
+            key: ${{ runner.os }}-node-modules-${{ hashFiles('packages-lock.json') }}
+            restore-keys: |
+                ${{ runner.os }}-node-modules-
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Run test
+        run: npm run test
+
+      - name: Build page
+        run: npm run build
