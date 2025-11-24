@@ -31,3 +31,6 @@ jobs:
 
       - name: Build page
         run: npm run build
+      
+      - name: Hola
+        run: echo "Hola prueba " >> $GITHUB_STEP_SUMMARY
