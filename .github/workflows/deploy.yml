@@ -2,8 +2,9 @@ name: Deploy
 
 on: push
 
-# Comentario
-# Comentario
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build_job:
